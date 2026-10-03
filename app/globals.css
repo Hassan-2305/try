@@ -1,0 +1,183 @@
+@import "tailwindcss";
+
+/*
+  Design tokens
+  ivory   – jasmine & rice: the page itself
+  cream   – a deeper ivory for quiet surfaces
+  maroon  – kumkum and wedding silk: actions and emphasis
+  wine    – the darkest burgundy: contact & footer grounds
+  gold    – kasavu zari: borders and ornament only (never small text)
+  ink     – warm charcoal for reading
+*/
+@theme {
+  --color-ivory: #f8f1e4;
+  --color-cream: #f0e5d0;
+  --color-maroon: #6e1f2b;
+  --color-maroon-deep: #571722;
+  --color-wine: #3d1019;
+  --color-gold: #a98239;
+  --color-gold-soft: #d6bc84;
+  --color-ink: #2b2420;
+  --color-ink-soft: #5b5049;
+
+  --font-serif: var(--font-cormorant), "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-dmsans), "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --ease-silk: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+    scroll-padding-top: 4.5rem;
+  }
+
+  body {
+    background: var(--color-ivory);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    line-height: 1.08;
+    letter-spacing: 0.005em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: var(--color-maroon);
+    color: var(--color-ivory);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /*
+    The kasavu border: the gold-and-maroon woven edge of a Kerala wedding
+    saree. It is the site's one ornament, used where one part of the
+    feast hands over to the next.
+  */
+  .kasavu {
+    height: 14px;
+    background:
+      repeating-linear-gradient(90deg, rgb(255 255 255 / 0.22) 0 1px, transparent 1px 4px),
+      linear-gradient(
+        to bottom,
+        var(--color-gold) 0 6px,
+        transparent 6px 8px,
+        var(--color-maroon) 8px 9px,
+        transparent 9px 11px,
+        var(--color-gold) 11px 14px
+      );
+  }
+
+  .kasavu-thin {
+    height: 6px;
+    background:
+      repeating-linear-gradient(90deg, rgb(255 255 255 / 0.22) 0 1px, transparent 1px 4px),
+      linear-gradient(to bottom, var(--color-gold) 0 3px, transparent 3px 4px, var(--color-gold-soft) 4px 6px);
+  }
+
+  .container-x {
+    width: 100%;
+    max-width: 72rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+
+  @media (min-width: 640px) {
+    .container-x {
+      padding-inline: 2rem;
+    }
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    min-height: 3.25rem;
+    padding: 0.85rem 1.6rem;
+    border-radius: 999px;
+    font-family: var(--font-sans);
+    font-size: 0.975rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    transition:
+      background-color 0.35s var(--ease-silk),
+      color 0.35s var(--ease-silk),
+      border-color 0.35s var(--ease-silk),
+      transform 0.35s var(--ease-silk);
+  }
+
+  .btn:active {
+    transform: scale(0.97);
+  }
+
+  .btn-primary {
+    background: var(--color-maroon);
+    color: var(--color-ivory);
+  }
+
+  .btn-primary:hover {
+    background: var(--color-maroon-deep);
+  }
+
+  .btn-ghost-light {
+    border: 1px solid rgb(248 241 228 / 0.55);
+    color: var(--color-ivory);
+  }
+
+  .btn-ghost-light:hover {
+    background: rgb(248 241 228 / 0.12);
+    border-color: var(--color-ivory);
+  }
+
+  .btn-gold {
+    background: var(--color-gold-soft);
+    color: var(--color-wine);
+  }
+
+  .btn-gold:hover {
+    background: #e2cb98;
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
